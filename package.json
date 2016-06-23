@@ -1,0 +1,17 @@
+{
+  "main": "index.html",
+  "name": "Shahar Lahav",
+  "description": "Shahar Lahav",
+  "version": "0.1.0",
+  "keywords": [ "demo", "node-webkit" ],
+  "window": {
+    "title": "Shahar Lahav",
+    "toolbar": true,
+    "frame": false,
+    "fullscreen":true,
+    "position": "mouse"
+  },
+  "webkit": {
+    "plugin": true
+  }
+}
