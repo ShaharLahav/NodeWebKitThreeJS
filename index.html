@@ -76,7 +76,7 @@ animate();
 				mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
 
 				raycaster.setFromCamera( mouse, camera );
-
+                
 				var intersects = raycaster.intersectObjects( scene.children );
 
 				if ( intersects.length > 0 ) {
@@ -89,12 +89,19 @@ animate();
                         
                     var pos = intersects[ 0 ].object.position;
                     
-					var x = new TWEEN.Tween( intersects[ 0 ].object.position ).to( {
-						x: pos.x + Math.random() *10 -5,
-						y: pos.y + Math.random() *10 -5,
-						z: pos.z + Math.random() *10 -5 }, 2000 )
-					.easing( TWEEN.Easing.Elastic.Out).start();
-
+//					var x = new TWEEN.Tween( intersects[ 0 ].object.position ).to( {
+//						x: pos.x + Math.random() *10 -5,
+//						y: pos.y + Math.random() *10 -5,
+//						z: pos.z + Math.random() *10 -5 }, 2000 )
+//					.easing( TWEEN.Easing.Elastic.Out).start();
+//                    alert(camera.position.x+3*raycaster.ray.direction.x)
+                    	var x = new TWEEN.Tween( intersects[ 0 ].object.position ).to( {
+						x: camera.position.x+6*raycaster.ray.direction.x,
+						y: camera.position.y+6*raycaster.ray.direction.y,
+						z: camera.position.z+6*raycaster.ray.direction.z  }, 1000 )
+					.easing( TWEEN.Easing.Quintic.Out).start();
+//                    
+                    
 //					var x = new TWEEN.Tween( intersects[ 0 ].object.rotation ).to( {
 //						x: Math.random() * 2 * Math.PI,
 //						y: Math.random() * 2 * Math.PI,
@@ -122,11 +129,20 @@ function init() {
   // world
 
   var geometry = new THREE.CylinderGeometry( 0, 0.3, 1, 4,1 );
+  var geometry1 = new THREE.BoxGeometry( 0.7,0.7,0.7 );
+  var geometry2 = new THREE.TorusGeometry( 0.5,0.2,0.5,50 );
+    
+    var ar = [];
+    ar.push(geometry);
+    ar.push(geometry1);
+    ar.push(geometry2);
+    
   var material = new THREE.MeshLambertMaterial( { color:0xffffff, shading: THREE.FlatShading} );
 
   for ( var i = 0; i < 500; i ++ ) {
-
-    var mesh = new THREE.Mesh( geometry, material );
+      var x = i%3;
+    var geometrry = ar[x];
+    var mesh = new THREE.Mesh( geometrry, material );
     mesh.position.x = ( Math.random() - 0.5 ) * 50;
     mesh.position.y = ( Math.random() - 0.5 ) * 50;
     mesh.position.z = ( Math.random() - 0.5 ) * 50;
